@@ -22,13 +22,29 @@ int main() { // start of main function, program execution begins here
     int guess; // variable to store the user's guess each attempt
     int max_tries = 3; // maximum number of guesses allowed
     int won = 0; // flag to track if the user has won (0 = not yet, 1 = won)
+    int valid;   // stores the return value of scanf to check if input was numeric
+
 
     printf("Guess a number between 1 and 10.\n"); // print initial instructions to the user
 
     for (int attempt = 1; attempt <= max_tries; attempt++) { // loop from attempt 1 up to max_tries
         printf("Attempt %d/%d. Enter your guess: ", attempt, max_tries); // show current attempt number and prompt for input
-        scanf("%d", &guess); // read the user's guess into the guess variable
+        valid = scanf("%d", &guess); // read the user's guess into the guess variable
+        
+        //*** new code from me: check if invalid 
+        if (valid != 1) {  // Check if scanf failed to read a number
+            printf("Invalid input. Please enter a number.\n"); // tell the user their input wasn't numeric
+            while (getchar() != '\n');   // clear the bad input out of the buffer so it isn't read again
+            attempt--;     // dont count this as a used attempt, let them try again
+            continue;     // skip the rest of this loop iteration and restart
+        }
 
+        if (guess < 1 || guess > 10) { // Check if the guess is outside the allowed 1-10 range
+            printf("Out of range! Please guess between 1 and 10.\n");  // tell the user their guess is out of bounds
+            attempt--; // don't count this as a used attempt, let them try again
+            continue;    // skip the rest of this loop iteration and restart
+        }
+  
         if (guess < secret) { // check if the guess is lower than the secret number
             printf("Too low! Try again.\n"); // tell the user their guess was too low
         } else if (guess > secret) { // check if the guess is higher than the secret number
