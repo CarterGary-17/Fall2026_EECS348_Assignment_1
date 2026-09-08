@@ -1,3 +1,20 @@
+//// EECS 348 Assignment 1 - Number Guessing Game 
+// ChatGPT code
+
+
+// A C program that picks a secret number between 1 and 10 and gives the
+// user up to 3 tries to guess it, telling them if they're too high, too
+// low, or correct.
+
+// Input: none (reads guesses interactively from the keyboard via scanf) -user input in CLI
+// Output: terminal prompts and feedback for the user, plus a final win/lose message
+
+// Collaborators: None 
+// Other sources: None 
+// Author: Carter Gray
+// Creation date: 8/9/2026
+
+
 #include <stdio.h> // includes input/output functions
 
 
